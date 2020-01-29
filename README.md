@@ -1,1 +1,0 @@
-# GlobalSurveys-Android
