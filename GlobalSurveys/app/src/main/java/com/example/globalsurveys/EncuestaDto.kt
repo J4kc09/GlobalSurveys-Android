@@ -1,49 +1,50 @@
-package com.example.globalsurveys
+package com.globalsurveys.app
 
-class EncuestaDto {
+
+class EncuestaDto  {
 
     private val serialVersionUID = 1L
-    private var idEncuesta: Long? = null
-    private var nomEncuesta: String? = null
-    private var descripcionEncuesta: String? = null
+    private var idEncuesta: Long = -1
+    internal var nomEncuesta: String = ""
+    internal var descripcionEncuesta: String = ""
 
     fun EncuestaDto() {}
 
-    fun EncuestaDto(idEncuesta: Long?) {
+    fun EncuestaDto(idEncuesta: Long) {
         this.idEncuesta = idEncuesta
     }
 
     fun EncuestaDto(
-        idEncuesta: Long?,
-        nomEncuesta: String?,
-        descripcionEncuesta: String?
+        idEncuesta: Long,
+        nomEncuesta: String,
+        descripcionEncuesta: String
     ) {
         this.idEncuesta = idEncuesta
         this.nomEncuesta = nomEncuesta
         this.descripcionEncuesta = descripcionEncuesta
     }
 
-    fun getIdEncuesta(): Long? {
+    fun getIdEncuesta(): Long {
         return idEncuesta
     }
 
-    fun setIdEncuesta(idEncuesta: Long?) {
+    fun setIdEncuesta(idEncuesta: Long) {
         this.idEncuesta = idEncuesta
     }
 
-    fun getNomEncuesta(): String? {
+    fun getNomEncuesta(): String {
         return nomEncuesta
     }
 
-    fun setNomEncuesta(nomEncuesta: String?) {
+    fun setNomEncuesta(nomEncuesta: String) {
         this.nomEncuesta = nomEncuesta
     }
 
-    fun getDescripcionEncuesta(): String? {
+    fun getDescripcionEncuesta(): String {
         return descripcionEncuesta
     }
 
-    fun setDescripcionEncuesta(descripcionEncuesta: String?) {
+    fun setDescripcionEncuesta(descripcionEncuesta: String) {
         this.descripcionEncuesta = descripcionEncuesta
     }
 

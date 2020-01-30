@@ -15,21 +15,10 @@
         android:padding="25dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="346dp"
-            android:layout_height="230dp"
-            android:layout_marginTop="28dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.285"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_submit" />
-
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="113dp"
-            android:layout_height="125dp"
+            android:layout_width="137dp"
+            android:layout_height="239dp"
             app:srcCompat="@drawable/logo" />
 
         <EditText
@@ -66,9 +55,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="sendJson"
-                android:text="@string/Entrar"
+                android:text="Entrar"
                 android:textAllCaps="false" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="346dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:textColor="#E10E00"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.285"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_submit" />
 
 
     </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.globalsurveys
+package com.globalsurveys.app
 
 class LoginDto {
 

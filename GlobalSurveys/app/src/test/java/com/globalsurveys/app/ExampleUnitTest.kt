@@ -1,4 +1,4 @@
-package com.example.globalsurveys
+package com.globalsurveys.app
 
 import org.junit.Test
 
