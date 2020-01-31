@@ -2,6 +2,7 @@ package com.globalSurveys.app
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -22,8 +23,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-    }
+        var et_user_name = findViewById(R.id.et_user_name) as EditText
+        var et_password = findViewById(R.id.et_password) as EditText
+        et_user_name.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                et_user_name.setText(et_user_name.text.subSequence(0, et_user_name.text.length-1));
+                et_password.requestFocus()
+            }
+            false
+        })
 
+    }
 
     fun sendJson (view: View){
         val textView = findViewById<TextView>(R.id.textView)
@@ -62,14 +72,16 @@ class MainActivity : AppCompatActivity() {
 
                     val i = Intent(this@MainActivity, EncuestaActivity::class.java)
                     i.putExtras(encuestas)
+                    i.putExtra("nombre", user_name.toString());
+                    i.putExtra("contrasena", password.toString());
                     startActivity(i)
 
                 } else {
-                    textView.text = "Usuario o contraseña incorrecto. Inténtelo de nuevo."
+                    textView.text = "Usuario o contraseña incorrecto. Inténtelo de nuevo"
                 }
 
             },
-                Response.ErrorListener { textView.text = "Ha ocurrido un error interno posiblemente de IP. " })
+                Response.ErrorListener { textView.text = "Ha ocurrido un error interno, posiblemente de IP " })
             queue.add(request)
         }
 

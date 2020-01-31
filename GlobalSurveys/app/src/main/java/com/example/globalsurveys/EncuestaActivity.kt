@@ -1,17 +1,23 @@
 package com.globalsurveys.app
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 //import com.globalSurveys.app.Encuesta
 import com.globalsurveys.app.R
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_encuesta.*
 
 class EncuestaActivity : AppCompatActivity() {
 
@@ -25,9 +31,46 @@ class EncuestaActivity : AppCompatActivity() {
         val encuestas = parse_json(en.toString())
         listView.adapter = Adaptador(this, encuestas)
         /*textView.text = en*/
+
+        val swiperefresh = findViewById<SwipeRefreshLayout>(R.id.swiperefresh)
+        swiperefresh.setColorSchemeResources(R.color.colorPrimary, R.color.refresh);
+
+        swiperefresh.setOnRefreshListener {
+
+            val user_name = intent.getStringExtra("nombre")
+            val password = intent.getStringExtra("contrasena")
+
+            Toast.makeText(this, "Encuestas Actualizadas", Toast.LENGTH_LONG).show()
+
+                    val queue = Volley.newRequestQueue(this)
+                    val url =
+                        "http://192.168.8.11:8080/GlobalSurveys/webresources/rest/login/" + user_name + "/" + password
+
+                    val request = JsonObjectRequest(
+                        Request.Method.GET, url, null, Response.Listener
+                        { response ->
+
+                            val gson = Gson()
+                            val loginDto: LoginDto =
+                                gson.fromJson(response.toString(), LoginDto::class.java);
+
+                                val encuestas = Bundle()
+                                encuestas.putString("key", response.toString())
+
+                                val i = Intent(this@EncuestaActivity, EncuestaActivity::class.java)
+                                i.putExtras(encuestas)
+                                i.putExtra("nombre", user_name);
+                                i.putExtra("contrasena", password);
+                                startActivity(i)
+
+                        },
+                        Response.ErrorListener {})
+                    queue.add(request)
+
+            swiperefresh.setRefreshing(false);
+
+        }
     }
-
-
 
     fun parse_json(archivo: String): List<EncuestaDto> {
         val gson = Gson()
@@ -67,7 +110,6 @@ class EncuestaActivity : AppCompatActivity() {
             return position.toLong()
         }
     }
-
 
 }
 
